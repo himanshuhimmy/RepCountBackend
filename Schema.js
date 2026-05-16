@@ -29,6 +29,7 @@ let exercisesSchema = new mongoose.Schema(
       ref: `Muscle-Group`,
       required: true,
     },
+    isCustom: { type: Boolean, default: false },
   },
   { collection: `Exercises` },
 );

@@ -83,7 +83,9 @@ app.get("/getMuscles", verifyToken, async (req, res) => {
 // ─── Exercises ────────────────────────────────────────────────────────────────
 
 app.get("/getAllExercise", verifyToken, async (req, res) => {
-  const data = await exercisesModel.find().populate("muscleId");
+  const data = await exercisesModel.find({
+    $or: [{ isCustom: { $ne: true } }, { userId: req.user._id }],
+  }).populate("muscleId");
   res.send(data);
 });
 
